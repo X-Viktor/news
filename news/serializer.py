@@ -15,7 +15,14 @@ class NewsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = News
-        fields = ['name', 'short_desc', 'type_name', 'type_color']
+        fields = [
+            'name', 'short_desc', 'type_name',
+            'type_color', 'description', 'type',
+        ]
+        extra_kwargs = {
+            'type': {'write_only': True},
+            'description': {'write_only': True},
+        }
 
 
 class NewsDetailSerializer(serializers.ModelSerializer):

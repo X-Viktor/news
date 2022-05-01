@@ -1,5 +1,5 @@
 from rest_framework.generics import (
-    CreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
+    ListCreateAPIView, RetrieveUpdateDestroyAPIView
 )
 
 from news.models import Type, News
@@ -8,12 +8,12 @@ from news.serializer import (
 )
 
 
-class TypesAPIView(ListAPIView):
+class TypesAPIView(ListCreateAPIView):
     queryset = Type.objects.all()
     serializer_class = TypeSerializer
 
 
-class NewsAPIView(ListAPIView):
+class NewsAPIView(ListCreateAPIView):
     queryset = News.objects.select_related('type')
     serializer_class = NewsSerializer
 
@@ -24,11 +24,11 @@ class NewsAPIView(ListAPIView):
         return self.queryset.all()
 
 
-class TypeDetailAPIView(CreateAPIView, RetrieveUpdateDestroyAPIView):
+class TypeDetailAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Type.objects.all()
     serializer_class = TypeSerializer
 
 
-class NewsDetailAPIView(CreateAPIView, RetrieveUpdateDestroyAPIView):
+class NewsDetailAPIView(RetrieveUpdateDestroyAPIView):
     queryset = News.objects.select_related('type')
     serializer_class = NewsDetailSerializer
