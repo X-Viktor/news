@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  web:
+    container_name: news-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - ./config/.env
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "8000:8000"
