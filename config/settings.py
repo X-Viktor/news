@@ -14,6 +14,8 @@ DEBUG = env.bool('DJANGO_DEBUG', default=False)
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=[])
 
+INTERNAL_IPS = ['127.0.0.1']
+
 
 # Application definition
 
@@ -27,6 +29,9 @@ INSTALLED_APPS = [
 
     'debug_toolbar',
     'rest_framework',
+    'colorfield',
+
+    'news',
 ]
 
 MIDDLEWARE = [
@@ -37,6 +42,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
